@@ -23,6 +23,6 @@ public interface EmployeeDao {
     @Insert
     void insert(Employee employee);
 
-    @Query("DELETE FROM word_table")
+    @Query("DELETE FROM employee_table")
     void deleteAll();
 }
