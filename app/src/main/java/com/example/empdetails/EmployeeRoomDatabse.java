@@ -8,7 +8,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Employee.class}, version = 1)
+@Database(entities = {Employee.class}, version = 1, exportSchema = false)
 public abstract class EmployeeRoomDatabse extends RoomDatabase {
 
     public abstract EmployeeDao employeeDao();
