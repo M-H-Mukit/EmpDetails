@@ -1,4 +1,4 @@
-package com.example.empdetails;
+package com.example.empdetails.Db;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -8,20 +8,28 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-@Database(entities = {Employee.class}, version = 1, exportSchema = false)
-public abstract class EmployeeRoomDatabse extends RoomDatabase {
+import com.example.empdetails.Dao.EmployeeDao;
+import com.example.empdetails.Entity.Employee;
+
+/**
+ * This is the backend. The database. This used to be done by the OpenHelper.
+ * The fact that this has very few comments emphasizes its coolness.
+ */
+
+@Database(entities = {Employee.class}, version = 2, exportSchema = false)
+public abstract class EmployeeRoomDatabase extends RoomDatabase {
 
     public abstract EmployeeDao employeeDao();
 
     // marking the instance as volatile to ensure atomic access to the variable
-    private static volatile EmployeeRoomDatabse INSTANCE;
+    private static volatile EmployeeRoomDatabase INSTANCE;
 
-    static EmployeeRoomDatabse getDatabase(final Context context) {
+    public static EmployeeRoomDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (EmployeeRoomDatabse.class) {
+            synchronized (EmployeeRoomDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            EmployeeRoomDatabse.class, "word_database")
+                            EmployeeRoomDatabase.class, "employee_database")
                             // Wipes and rebuilds instead of migrating if no Migration object.
                             // Migration is not part of this codelab.
                             .fallbackToDestructiveMigration()
@@ -59,7 +67,7 @@ public abstract class EmployeeRoomDatabse extends RoomDatabase {
 
         private final EmployeeDao mDao;
 
-        PopulateDbAsync(EmployeeRoomDatabse db) {
+        PopulateDbAsync(EmployeeRoomDatabase db) {
             mDao = db.employeeDao();
         }
 
@@ -69,9 +77,9 @@ public abstract class EmployeeRoomDatabse extends RoomDatabase {
             // Not needed if you only populate on creation.
             mDao.deleteAll();
 
-            Employee employee_name=new Employee("Hello");
-            mDao.insert(employee_name);
-            employee_name = new Employee("World");
+            Employee employee_name=new Employee("Fahim",
+                    "Hasan","soft dev",
+                    "mehe@kskv","01684607182" );
             mDao.insert(employee_name);
             return null;
         }

@@ -1,8 +1,12 @@
-package com.example.empdetails;
+package com.example.empdetails.Repository;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+
+import com.example.empdetails.Dao.EmployeeDao;
+import com.example.empdetails.Db.EmployeeRoomDatabase;
+import com.example.empdetails.Entity.Employee;
 
 import java.util.List;
 
@@ -15,22 +19,22 @@ public class EmployeeRepository {
     // See the BasicSample in the android-architecture-components repository at
     // https://github.com/googlesamples
 
-    EmployeeRepository(Application application) {
-        EmployeeRoomDatabse db= EmployeeRoomDatabse.getDatabase(application);
+    public EmployeeRepository(Application application) {
+        EmployeeRoomDatabase db= EmployeeRoomDatabase.getDatabase(application);
         mEmployeeDao=db.employeeDao();
-        mAllEmployee=mEmployeeDao.getAlphabetName();
+        mAllEmployee=mEmployeeDao.getAlphabetizedEmployeeName();
 
     }
     // Room executes all queries on a separate thread.
     // Observed LiveData will notify the observer when the data has changed.
-    LiveData<List<Employee>> getmAllEmployee() {
+    public LiveData<List<Employee>> getAllEmployee() {
         return mAllEmployee;
     }
 
     // You must call this on a non-UI thread or your app will crash.
     // Like this, Room ensures that you're not doing any long running operations on the main
     // thread, blocking the UI.
-    void insert(Employee employee) {
+    public void insert(Employee employee) {
         new insertAsyncTask(mEmployeeDao).execute(employee);
     }
 

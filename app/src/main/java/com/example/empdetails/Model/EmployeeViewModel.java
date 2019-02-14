@@ -1,15 +1,18 @@
-package com.example.empdetails;
+package com.example.empdetails.Model;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
+import com.example.empdetails.Repository.EmployeeRepository;
+import com.example.empdetails.Entity.Employee;
+
 import java.util.List;
 
 public class EmployeeViewModel extends AndroidViewModel {
 
-    private EmployeeRepository mReposritory;
+    private EmployeeRepository mRepository;
     // Using LiveData and caching what getAlphabetizedWords returns has several benefits:
     // - We can put an observer on the data (instead of polling for changes) and only update the
     //   the UI when the data actually changes.
@@ -18,15 +21,15 @@ public class EmployeeViewModel extends AndroidViewModel {
 
     public EmployeeViewModel(@NonNull Application application) {
         super(application);
-        mReposritory = new EmployeeRepository(application);
-        mAllEmployee = mReposritory.getmAllEmployee();
+        mRepository = new EmployeeRepository(application);
+        mAllEmployee = mRepository.getAllEmployee();
     }
 
-    LiveData<List<Employee>> getmAllEmployee() {
+    public LiveData<List<Employee>> getAllEmployee() {
         return mAllEmployee;
     }
 
-    void insert(Employee employee){
-        mReposritory.insert(employee);
+    public void insert(Employee employee){
+        mRepository.insert(employee);
     }
 }

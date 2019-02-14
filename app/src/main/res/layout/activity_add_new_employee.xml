@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddNewEmployee">
+    tools:context=".Activity.AddNewEmployee">
 
     <TextView
         android:id="@+id/title"
@@ -32,7 +32,7 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -53,7 +53,7 @@
         android:src="@drawable/person" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/first_name_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/last_name_input"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -75,22 +75,22 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/first_name_input"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/designation_spinner"
         android:layout_width="273dp"
         android:layout_height="47dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/first_name_input" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/phone_no_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -103,10 +103,10 @@
         android:inputType="phone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/designation_spinner" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/email_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
@@ -119,10 +119,10 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_no_input" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/employee_add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Add Employee"
@@ -132,7 +132,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        android:onClick="onClickEmployeeButton"
+        app:layout_constraintTop_toBottomOf="@+id/email_input" />
 
 
 </android.support.constraint.ConstraintLayout>
