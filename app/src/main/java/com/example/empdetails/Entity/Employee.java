@@ -59,7 +59,6 @@ public class Employee {
     }
 
     public Employee(@NonNull String firstName, String lastName, String designation, String email, String phoneNo) {
-        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.designation = designation;
