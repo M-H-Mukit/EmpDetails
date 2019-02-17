@@ -1,4 +1,4 @@
-package com.example.empdetails.Db;
+package com.example.empdetails.db;
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
 import android.arch.persistence.room.Database;
@@ -8,8 +8,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
-import com.example.empdetails.Dao.EmployeeDao;
-import com.example.empdetails.Entity.Employee;
+import com.example.empdetails.dao.EmployeeDao;
+import com.example.empdetails.entity.Employee;
 
 /**
  * This is the backend. The database. This used to be done by the OpenHelper.
@@ -44,7 +44,7 @@ public abstract class EmployeeRoomDatabase extends RoomDatabase {
     /**
      * Override the onOpen method to populate the database.
      * For this sample, we clear the database every time it is created or opened.
-     *
+     * <p>
      * If you want to populate the database only when the database is created for the 1st time,
      * override RoomDatabase.Callback()#onCreate
      */
@@ -77,9 +77,13 @@ public abstract class EmployeeRoomDatabase extends RoomDatabase {
             // Not needed if you only populate on creation.
             mDao.deleteAll();
 
-            Employee employee_name=new Employee("Fahim",
-                    "Hasan","soft dev",
-                    "mehe@kskv","01684607182" );
+            Employee employee_name = new Employee("Fahim",
+                    "Ahmed", "software dev",
+                    "fahim.ahmed@gmail.com", "01684607182");
+            mDao.insert(employee_name);
+            employee_name = new Employee("Sabbir",
+                    "Alam", "software dev",
+                    "sabbir.alam@gmail.com", "01684607182");
             mDao.insert(employee_name);
             return null;
         }

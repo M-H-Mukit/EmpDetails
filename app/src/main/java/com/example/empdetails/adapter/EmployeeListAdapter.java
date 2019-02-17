@@ -1,4 +1,4 @@
-package com.example.empdetails.Adapter;
+package com.example.empdetails.adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.empdetails.Entity.Employee;
+import com.example.empdetails.entity.Employee;
 import com.example.empdetails.R;
 
 import java.util.Collections;
@@ -20,13 +20,15 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
     private final LayoutInflater mInflater;
     private List<Employee> mEmployees = Collections.emptyList();
 
+    private static ClickListener clickListener;
+
     public EmployeeListAdapter(Context context) {
         mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public EmployeeViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = mInflater.inflate(R.layout.recyclerview_item,viewGroup,false);
+        View itemView = mInflater.inflate(R.layout.recyclerview_item, viewGroup, false);
 
         return new EmployeeViewHolder(itemView);
     }
@@ -44,12 +46,16 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
         notifyDataSetChanged();
     }
 
+    public Employee getEmployee(int position) {
+        return mEmployees.get(position);
+    }
+
     @Override
     public int getItemCount() {
         return mEmployees.size();
     }
 
-    class EmployeeViewHolder extends RecyclerView.ViewHolder {
+    class EmployeeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private final TextView firstName;
         private final TextView lastName;
         private final ImageView person_image;
@@ -57,11 +63,35 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
 
         private EmployeeViewHolder(View itemView) {
             super(itemView);
-            firstName =itemView.findViewById(R.id.first_name_view);
-            lastName=itemView.findViewById(R.id.second_name_view);
-            person_image=itemView.findViewById(R.id.person_view);
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
+
+            firstName = itemView.findViewById(R.id.first_name_view);
+            lastName = itemView.findViewById(R.id.second_name_view);
+            person_image = itemView.findViewById(R.id.person_view);
 
         }
+
+        @Override
+        public void onClick(View v) {
+            clickListener.onItemClick(getAdapterPosition(), v);
+        }
+
+        @Override
+        public boolean onLongClick(View v) {
+            clickListener.onItemLongClick(getAdapterPosition(), v);
+            return false;
+        }
+    }
+
+    public void setOnItemClickListener(ClickListener clickListener) {
+        EmployeeListAdapter.clickListener = clickListener;
+    }
+
+    public interface ClickListener {
+        void onItemClick(int position, View v);
+
+        void onItemLongClick(int position, View v);
     }
 
 

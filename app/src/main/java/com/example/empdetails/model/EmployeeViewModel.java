@@ -1,12 +1,12 @@
-package com.example.empdetails.Model;
+package com.example.empdetails.model;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
-import com.example.empdetails.Repository.EmployeeRepository;
-import com.example.empdetails.Entity.Employee;
+import com.example.empdetails.repository.EmployeeRepository;
+import com.example.empdetails.entity.Employee;
 
 import java.util.List;
 
@@ -32,4 +32,10 @@ public class EmployeeViewModel extends AndroidViewModel {
     public void insert(Employee employee){
         mRepository.insert(employee);
     }
+
+    public void deleteEmployee(Employee employee)
+    {
+        mRepository.delete(employee);
+    }
+
 }

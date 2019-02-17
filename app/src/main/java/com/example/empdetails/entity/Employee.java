@@ -1,12 +1,14 @@
-package com.example.empdetails.Entity;
+package com.example.empdetails.entity;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
 @Entity(tableName = "employee_table")
-public class Employee {
+public class Employee implements Parcelable {
 
     @NonNull
     @PrimaryKey(autoGenerate = true)
@@ -17,6 +19,27 @@ public class Employee {
 
     @ColumnInfo(name = "last_name")
     private String lastName;
+
+    protected Employee(Parcel in) {
+        id = in.readInt();
+        firstName = in.readString();
+        lastName = in.readString();
+        designation = in.readString();
+        email = in.readString();
+        phoneNo = in.readString();
+    }
+
+    public static final Creator<Employee> CREATOR = new Creator<Employee>() {
+        @Override
+        public Employee createFromParcel(Parcel in) {
+            return new Employee(in);
+        }
+
+        @Override
+        public Employee[] newArray(int size) {
+            return new Employee[size];
+        }
+    };
 
     public void setId(int id) {
         this.id = id;
@@ -64,5 +87,20 @@ public class Employee {
         this.designation = designation;
         this.email = email;
         this.phoneNo = phoneNo;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(designation);
+        dest.writeString(email);
+        dest.writeString(phoneNo);
     }
 }

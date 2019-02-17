@@ -12,11 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.EmployeeDetailsActivity"></activity>
         <activity
-            android:name=".Activity.AddNewEmployee"
+            android:name=".activity.AddNewEmployee"
             android:label="@string/title_activity_add_new_employee"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".Activity.MainActivity">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

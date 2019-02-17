@@ -1,12 +1,12 @@
-package com.example.empdetails.Repository;
+package com.example.empdetails.repository;
 
 import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
 
-import com.example.empdetails.Dao.EmployeeDao;
-import com.example.empdetails.Db.EmployeeRoomDatabase;
-import com.example.empdetails.Entity.Employee;
+import com.example.empdetails.dao.EmployeeDao;
+import com.example.empdetails.db.EmployeeRoomDatabase;
+import com.example.empdetails.entity.Employee;
 
 import java.util.List;
 
@@ -37,7 +37,9 @@ public class EmployeeRepository {
     public void insert(Employee employee) {
         new insertAsyncTask(mEmployeeDao).execute(employee);
     }
+    public void delete(Employee employee){new deleteAsyncTask(mEmployeeDao).execute(employee);}
 
+    //asyncTask
     private static class insertAsyncTask extends AsyncTask<Employee, Void, Void> {
 
         private EmployeeDao mAsyncTaskDao;
@@ -49,6 +51,21 @@ public class EmployeeRepository {
         @Override
         protected Void doInBackground(final Employee... params) {
             mAsyncTaskDao.insert(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<Employee, Void, Void> {
+
+        private EmployeeDao mAsyncTaskDao;
+
+        deleteAsyncTask(EmployeeDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(final Employee... params) {
+            mAsyncTaskDao.deleteEmployeeById(params[0].getId());
             return null;
         }
     }

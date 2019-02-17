@@ -1,11 +1,11 @@
-package com.example.empdetails.Dao;
+package com.example.empdetails.dao;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.example.empdetails.Entity.Employee;
+import com.example.empdetails.entity.Employee;
 
 import java.util.List;
 
@@ -27,6 +27,9 @@ public interface EmployeeDao {
     // column, you can use @Insert(onConflict = OnConflictStrategy.REPLACE) to update a row.
     @Insert
     void insert(Employee employee);
+
+    @Query("DELETE FROM employee_table where id=:id")
+    void deleteEmployeeById(int id);
 
     @Query("DELETE FROM employee_table")
     void deleteAll();
