@@ -48,6 +48,7 @@ public class AddNewEmployee extends AppCompatActivity {
 
     }
 
+
     public void onClickEmployeeButton(View view) {
         Intent replyIntent = new Intent(this,MainActivity.class);
         if (TextUtils.isEmpty(editFirstNameView.getText())) {
