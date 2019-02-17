@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.example.empdetails.entity.Employee;
 import com.example.empdetails.R;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,6 +54,13 @@ public class EmployeeListAdapter extends RecyclerView.Adapter<EmployeeListAdapte
     @Override
     public int getItemCount() {
         return mEmployees.size();
+    }
+
+    public void updateList(List<Employee> newList){
+        mEmployees = new ArrayList<>();
+        mEmployees.addAll(newList);
+        notifyDataSetChanged();
+
     }
 
     class EmployeeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {

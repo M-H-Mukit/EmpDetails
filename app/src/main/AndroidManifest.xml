@@ -3,6 +3,7 @@
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.example.empdetails">
 
+    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
     <dist:module dist:instant="true" />
 
     <application
